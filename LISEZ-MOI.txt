@@ -1,0 +1,4 @@
+Mise à jour : section Restaurant Management (captures client / admin, sans démo live)
+1. Dézippe ce dossier PAR-DESSUS ton projet portfolio (il remplace src/app/app.ts, src/styles.css et ajoute public/projects/rs-*.jpg).
+2. Supprime le fichier src/app/demos.ts (il n'est plus utilisé).
+3. git add . && git commit -m "restaurant screenshots" && git push   -> Vercel redéploie tout seul.

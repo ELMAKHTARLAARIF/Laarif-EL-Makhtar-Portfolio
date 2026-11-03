@@ -1,7 +1,6 @@
 import { Component, Directive, ElementRef, HostListener, Input, NgZone, inject, signal } from '@angular/core';
 import { Bg3d } from './hero3d';
 import { Cursor, Shots, SkillSphere } from './widgets';
-import { RestoDemo } from './demos';
 
 @Directive({ selector: '[tilt]' })
 export class Tilt {
@@ -54,7 +53,7 @@ export class ScrollFill {
 }
 
 @Component({
-  selector: 'app-root', imports: [Bg3d, Cursor, Shots, SkillSphere, RestoDemo, Tilt, Magnet, Reveal, Scramble, Count, ScrollFill],
+  selector: 'app-root', imports: [Bg3d, Cursor, Shots, SkillSphere, Tilt, Magnet, Reveal, Scramble, Count, ScrollFill],
   template: `
 <app-cursor /><bg-3d />
 <div class="prog" [style.width.%]="prog()"></div>
@@ -90,11 +89,14 @@ export class ScrollFill {
 
 <section id="projects" class="sec wide"><h2 class="sech" reveal><span scramble>Projets</span><small>03</small></h2>
   <article class="chap" reveal>
-    <div class="ch"><span class="num">01</span><div><h3>Restaurant Management</h3><span class="badge live">● Démo live</span>
-      <p>Site de restaurant haut de gamme : carte filtrable, panier et commandes, réservation de table en ligne, paiement Stripe et tableau de bord admin avec statistiques.</p>
+    <div class="ch"><span class="num">01</span><div><h3>Restaurant Management</h3><span class="badge">▣ Captures</span>
+      <p>Application web pour un restaurant gastronomique, avec deux espaces bien séparés : un site client (accueil, carte, panier, réservation en ligne, suivi des commandes) et un tableau de bord administrateur (statistiques, commandes, réservations, gestion de la carte et des clients).</p>
       <div class="pills"><span>Laravel</span><span>PHP</span><span>Blade</span><span>Tailwind CSS</span><span>MySQL</span><span>Stripe</span></div>
       <a class="lnk" href="https://github.com/ELMAKHTARLAARIF/Gestion_restaurant" target="_blank" magnet>Voir le code ↗</a></div></div>
-    <div class="stage" [tilt]="2"><div class="frame"><div class="bar"><i></i><i></i><i></i><span>restaurant.test/menu — essaie-le !</span></div><demo-resto /></div></div>
+    <h4 class="sub"><span>Espace client</span> site public</h4>
+    <shots [list]="rsClient" />
+    <h4 class="sub admin"><span>Espace administrateur</span> dashboard sécurisé</h4>
+    <shots [list]="rsAdmin" />
   </article>
 
   <article class="chap" reveal>
@@ -142,6 +144,8 @@ export class App {
   <i class="p">openToWork</i>: <i class="k">true</i>,
   <i class="p">coffee</i>: <i class="k">Infinity</i>,
 &#125;;`;
+  rsClient = [{ src: 'projects/rs-c1.jpg', cap: 'Accueil' }, { src: 'projects/rs-c2.jpg', cap: 'La carte — filtres, recherche et panier' }, { src: 'projects/rs-c3.jpg', cap: 'Réservation de table en ligne' }, { src: 'projects/rs-c4.jpg', cap: 'Suivi des commandes en temps réel' }, { src: 'projects/rs-c5.jpg', cap: 'Connexion client' }];
+  rsAdmin = [{ src: 'projects/rs-a1.jpg', cap: 'Tableau de bord & statistiques' }, { src: 'projects/rs-a2.jpg', cap: 'Gestion des commandes (pipeline)' }, { src: 'projects/rs-a3.jpg', cap: 'Gestion des réservations' }, { src: 'projects/rs-a4.jpg', cap: 'Ajout d’un plat à la carte' }, { src: 'projects/rs-a5.jpg', cap: 'Gestion des clients' }];
   ws = [{ src: 'projects/ws-1.jpg', cap: 'Plan d’étage & membres non affectés' }, { src: 'projects/ws-2.jpg', cap: 'Affectation à une salle selon le rôle' }, { src: 'projects/ws-3.jpg', cap: 'Détails du profil et expériences' }, { src: 'projects/ws-4.jpg', cap: 'Ajout d’un nouveau collaborateur' }];
   cl = [{ src: 'projects/cl-2.jpg', cap: 'Dashboard administrateur' }, { src: 'projects/cl-1.jpg', cap: 'Connexion' }, { src: 'projects/cl-3.jpg', cap: 'Gestion des médecins' }, { src: 'projects/cl-4.jpg', cap: 'Espace médecin' }];
   timeline = [
