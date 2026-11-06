@@ -52,80 +52,181 @@ export class ScrollFill {
   @HostListener('window:scroll') s() { const r = this.el.getBoundingClientRect(); this.el.style.setProperty('--p', String(Math.max(0, Math.min(1, (innerHeight * 0.65 - r.top) / r.height)))); }
 }
 
+@Directive({ selector: '[parallax]' })
+export class Parallax {
+  private el = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  @HostListener('mousemove', ['$event']) m(e: MouseEvent) { const r = this.el.getBoundingClientRect(); this.el.style.setProperty('--mx', String(((e.clientX - r.left) / r.width) * 2 - 1)); this.el.style.setProperty('--my', String(((e.clientY - r.top) / r.height) * 2 - 1)); }
+  @HostListener('mouseleave') l() { this.el.style.setProperty('--mx', '0'); this.el.style.setProperty('--my', '0'); }
+}
+
 @Component({
-  selector: 'app-root', imports: [Bg3d, Cursor, Shots, SkillSphere, Tilt, Magnet, Reveal, Scramble, Count, ScrollFill],
+  selector: 'app-root', imports: [Bg3d, Cursor, Shots, SkillSphere, Tilt, Magnet, Reveal, Scramble, Count, ScrollFill, Parallax],
   template: `
-<app-cursor /><bg-3d />
-<div class="prog" [style.width.%]="prog()"></div>
-<div class="loader" [class.done]="ready()"><div class="ld"><b>ML<span>.</span></b><i><u [style.width.%]="pct()"></u></i><small>{{ pct() }}%</small></div></div>
+    <app-cursor/>
+    <bg-3d/>
+    <div class="prog" [style.width.%]="prog()"></div>
+    <div class="loader" [class.done]="ready()">
+      <div class="ld">
+        <img class="ldimg"
+             src="/projects/profile-900.webp"
+             srcset="/projects/profile-600.webp 600w, /projects/profile-900.webp 900w"
+             sizes="min(340px, 80vw)"
+             width="340" height="340"
+             fetchpriority="high"
+             alt="EML."/>
+        <i><u [style.width.%]="pct()"></u></i><small>{{ pct() }}%</small>
+      </div>
+    </div>
 
-<header class="nav"><a href="#top" class="logo">ML<span>.</span></a>
-  <nav><a href="#about">À propos</a><a href="#skills">Skills</a><a href="#projects">Projets</a><a href="#journey">Parcours</a><a href="#contact" class="cta" magnet>Contact</a></nav></header>
+    <header class="nav">
+      <a href="#top" class="logo">
+        <span class="av"><img src="/projects/avatar-200.webp" width="40" height="40" alt=""/></span>EML<span>.</span>
+      </a>
+      <nav>
+        <a href="#about">À propos</a><a href="#skills">Skills</a><a href="#projects">Projets</a><a href="#journey">Parcours</a><a
+          href="#contact" class="cta" magnet>Contact</a>
+      </nav>
+    </header>
 
-<main id="top" [class.go]="ready()">
-<section class="hero">
-  <div class="htxt"><p class="tag"><i></i> Disponible · stage & alternance</p>
-    <h1 class="mega"><span class="ln"><span>El Makhtar</span></span><span class="ln"><span class="grad">Laarif</span></span></h1>
-    <p class="role">&gt; {{ typed() }}<b class="caret"></b></p>
-    <p class="sub">Je conçois des applications web performantes — de l’API Java à l’interface Angular.</p>
-    <div class="btns"><a class="btn" href="#projects" magnet>Voir mes projets</a><a class="btn ghost" href="https://github.com/ELMAKHTARLAARIF" target="_blank" magnet>GitHub ↗</a></div></div>
-  <div class="scrollhint"><span>scroll</span><i></i></div>
-</section>
+    <main id="top" [class.go]="ready()">
+      <section class="hero" parallax>
+        <div class="htxt"><p class="tag"><i></i> Disponible · stage & alternance</p>
+          <h1 class="mega"><span class="ln"><span>El Makhtar</span></span><span class="ln"><span
+              class="grad">Laarif</span></span></h1>
+          <p class="role">&gt; {{ typed() }}<b class="caret"></b></p>
+          <p class="sub">Je conçois des applications web performantes — de l’API Java à l’interface Angular.</p>
+          <div class="btns"><a class="btn" href="#projects" magnet>Voir mes projets</a><a class="btn ghost"
+                                                                                          href="https://github.com/ELMAKHTARLAARIF"
+                                                                                          target="_blank" magnet>GitHub
+            ↗</a></div>
+        </div>
+        <div class="scene">
+          <div class="stage3">
+            <div class="orbit o1"></div>
+            <div class="orbit o2"></div>
+            <div class="card3d">
+              <img src="/projects/profile-900.webp"
+                   srcset="/projects/profile-600.webp 600w, /projects/profile-900.webp 900w"
+                   sizes="(max-width: 860px) 230px, 290px"
+                   width="290" height="334"
+                   fetchpriority="high"
+                   alt="El Makhtar Laarif"/>
+            </div>
+            <span class="fl f1">Java</span><span class="fl f2">Angular</span><span class="fl f3">Laravel</span><span
+              class="fl f4">.NET</span>
+            <div class="cube"><b>Java</b><b>Angular</b><b>.NET</b><b>PHP</b><b>SQL</b><b>Docker</b></div>
+          </div>
+        </div>
+        <div class="scrollhint"><span>scroll</span><i></i></div>
+      </section>
 
-<div class="marq"><div>@for (k of [1, 2]; track k) { <span>JAVA ✦ ANGULAR ✦ SPRING BOOT ✦ LARAVEL ✦ .NET ✦ POSTGRESQL ✦ DOCKER ✦ TAILWIND ✦ </span> }</div></div>
+      <div class="marq">
+        <div>@for (k of [1, 2]; track k) {
+          <span>JAVA ✦ ANGULAR ✦ SPRING BOOT ✦ LARAVEL ✦ .NET ✦ POSTGRESQL ✦ DOCKER ✦ TAILWIND ✦ </span>
+        }</div>
+      </div>
 
-<section id="about" class="sec two">
-  <div reveal><h2 class="sech"><span scramble>À propos</span></h2>
-    <p class="lead">Développeur Full Stack formé à <b>YouCode (UM6P)</b>, passionné par les technologies web et la création de solutions numériques performantes. Motivé, rigoureux et orienté résultats, je mets mes compétences au service de projets innovants.</p>
-    <div class="stats"><div tilt><b [count]="3">0</b>projets</div><div tilt><b [count]="24">0</b>repos GitHub</div><div tilt><b [count]="10">0</b>technos</div><div tilt><b [count]="1">0</b>stage PFA</div></div></div>
-  <div class="code glass" reveal tilt><div class="dots"><i></i><i></i><i></i><span>profile.ts</span></div><pre [innerHTML]="code"></pre></div>
-</section>
+      <section id="about" class="sec two">
+        <div reveal><h2 class="sech"><span scramble>À propos</span></h2>
+          <p class="lead">Développeur Full Stack formé à <b>YouCode (UM6P)</b>, passionné par les technologies web et la
+            création de solutions numériques performantes. Motivé, rigoureux et orienté résultats, je mets mes
+            compétences au service de projets innovants.</p>
+          <div class="stats">
+            <div tilt><b [count]="3">0</b>projets</div>
+            <div tilt><b [count]="24">0</b>repos GitHub</div>
+            <div tilt><b [count]="10">0</b>technos</div>
+            <div tilt><b [count]="1">0</b>stage PFA</div>
+          </div>
+        </div>
+        <div class="code glass" reveal tilt>
+          <div class="dots"><i></i><i></i><i></i><span>profile.ts</span></div>
+          <pre [innerHTML]="code"></pre>
+        </div>
+      </section>
 
-<section id="skills" class="sec two rev">
-  <div reveal><skill-sphere /></div>
-  <div reveal><h2 class="sech"><span scramble>Compétences</span></h2><p class="mut">Passe la souris sur la sphère ↖ pour la faire tourner.</p>
-    @for (g of skills; track g.t) { <div class="sg"><h3>{{ g.t }}</h3><div class="pills">@for (s of g.l; track s) { <span tilt>{{ s }}</span> }</div></div> }</div>
-</section>
+      <section id="skills" class="sec two rev">
+        <div reveal>
+          <skill-sphere/>
+        </div>
+        <div reveal><h2 class="sech"><span scramble>Compétences</span></h2>
+          <p class="mut">Passe la souris sur la sphère ↖ pour la faire tourner.</p>
+          @for (g of skills; track g.t) {
+            <div class="sg"><h3>{{ g.t }}</h3>
+              <div class="pills">@for (s of g.l; track s) {
+                <span tilt>{{ s }}</span>
+              }</div>
+            </div>
+          }</div>
+      </section>
 
-<section id="projects" class="sec wide"><h2 class="sech" reveal><span scramble>Projets</span><small>03</small></h2>
-  <article class="chap" reveal>
-    <div class="ch"><span class="num">01</span><div><h3>Restaurant Management</h3><span class="badge">▣ Captures</span>
-      <p>Application web pour un restaurant gastronomique, avec deux espaces bien séparés : un site client (accueil, carte, panier, réservation en ligne, suivi des commandes) et un tableau de bord administrateur (statistiques, commandes, réservations, gestion de la carte et des clients).</p>
-      <div class="pills"><span>Laravel</span><span>PHP</span><span>Blade</span><span>Tailwind CSS</span><span>MySQL</span><span>Stripe</span></div>
-      <a class="lnk" href="https://github.com/ELMAKHTARLAARIF/Gestion_restaurant" target="_blank" magnet>Voir le code ↗</a></div></div>
-    <h4 class="sub"><span>Espace client</span> site public</h4>
-    <shots [list]="rsClient" />
-    <h4 class="sub admin"><span>Espace administrateur</span> dashboard sécurisé</h4>
-    <shots [list]="rsAdmin" />
-  </article>
+      <section id="projects" class="sec wide"><h2 class="sech" reveal><span scramble>Projets</span><small>03</small>
+      </h2>
+        <article class="chap" reveal>
+          <div class="ch"><span class="num">01</span>
+            <div><h3>Restaurant Management</h3><span class="badge">▣ Captures</span>
+              <p>Application web pour un restaurant gastronomique, avec deux espaces bien séparés : un site client
+                (accueil, carte, panier, réservation en ligne, suivi des commandes) et un tableau de bord administrateur
+                (statistiques, commandes, réservations, gestion de la carte et des clients).</p>
+              <div class="pills"><span>Laravel</span><span>PHP</span><span>Blade</span><span>Tailwind CSS</span><span>MySQL</span><span>Stripe</span>
+              </div>
+              <a class="lnk" href="https://github.com/ELMAKHTARLAARIF/Gestion_restaurant" target="_blank" magnet>Voir le
+                code ↗</a></div>
+          </div>
+          <h4 class="sub"><span>Espace client</span> site public</h4>
+          <shots [list]="rsClient"/>
+          <h4 class="sub admin"><span>Espace administrateur</span> dashboard sécurisé</h4>
+          <shots [list]="rsAdmin"/>
+        </article>
 
-  <article class="chap" reveal>
-    <div class="ch"><span class="num">02</span><div><h3>Virtual Workspace</h3><span class="badge">▣ Captures</span>
-      <p>Application web interactive de gestion du personnel : plan d’étage, affectation des collaborateurs aux salles selon leur rôle, profils avec expériences, validation des champs et sauvegarde dans le localStorage.</p>
-      <div class="pills"><span>HTML</span><span>CSS</span><span>JavaScript ES6</span><span>localStorage</span></div>
-      <a class="lnk" href="https://github.com/ELMAKHTARLAARIF/Virtual_Workspace" target="_blank" magnet>Voir le code ↗</a></div></div>
-    <shots [list]="ws" />
-  </article>
+        <article class="chap" reveal>
+          <div class="ch"><span class="num">02</span>
+            <div><h3>Virtual Workspace</h3><span class="badge">▣ Captures</span>
+              <p>Application web interactive de gestion du personnel : plan d’étage, affectation des collaborateurs aux
+                salles selon leur rôle, profils avec expériences, validation des champs et sauvegarde dans le
+                localStorage.</p>
+              <div class="pills"><span>HTML</span><span>CSS</span><span>JavaScript ES6</span><span>localStorage</span>
+              </div>
+              <a class="lnk" href="https://github.com/ELMAKHTARLAARIF/Virtual_Workspace" target="_blank" magnet>Voir le
+                code ↗</a></div>
+          </div>
+          <shots [list]="ws"/>
+        </article>
 
-  <article class="chap" reveal>
-    <div class="ch"><span class="num">03</span><div><h3>Clinic Manager</h3><span class="badge">▣ Captures</span>
-      <p>Application Java EE de gestion de clinique avec trois espaces (admin, médecin, patient) : dashboard, médecins, patients, spécialités, départements, disponibilités et prise de rendez-vous.</p>
-      <div class="pills"><span>Java</span><span>JSP · JSTL</span><span>Servlets</span><span>Hibernate</span><span>PostgreSQL</span><span>Maven</span></div>
-      <a class="lnk" href="https://github.com/ELMAKHTARLAARIF/clinic-manager" target="_blank" magnet>Voir le code ↗</a></div></div>
-    <shots [list]="cl" />
-  </article>
-</section>
+        <article class="chap" reveal>
+          <div class="ch"><span class="num">03</span>
+            <div><h3>Clinic Manager</h3><span class="badge">▣ Captures</span>
+              <p>Application Java EE de gestion de clinique avec trois espaces (admin, médecin, patient) : dashboard,
+                médecins, patients, spécialités, départements, disponibilités et prise de rendez-vous.</p>
+              <div class="pills">
+                <span>Java</span><span>JSP · JSTL</span><span>Servlets</span><span>Hibernate</span><span>PostgreSQL</span><span>Maven</span>
+              </div>
+              <a class="lnk" href="https://github.com/ELMAKHTARLAARIF/clinic-manager" target="_blank" magnet>Voir le
+                code ↗</a></div>
+          </div>
+          <shots [list]="cl"/>
+        </article>
+      </section>
 
-<section id="journey" class="sec"><h2 class="sech" reveal><span scramble>Parcours</span></h2>
-  <div class="tl" scrollFill>@for (e of timeline; track e.t) { <div class="ti" reveal><i></i><div class="glass" tilt><small>{{ e.d }}</small><h3>{{ e.t }}</h3><p>{{ e.s }}</p></div></div> }</div></section>
+      <section id="journey" class="sec"><h2 class="sech" reveal><span scramble>Parcours</span></h2>
+        <div class="tl" scrollFill>@for (e of timeline; track e.t) {
+          <div class="ti" reveal><i></i>
+            <div class="glass" tilt><small>{{ e.d }}</small>
+              <h3>{{ e.t }}</h3>
+              <p>{{ e.s }}</p></div>
+          </div>
+        }</div>
+      </section>
 
-<section id="contact" class="sec center">
-  <p class="mut" reveal>Un projet, un stage, une idée ?</p>
-  <h2 class="giant" reveal>Parlons-en<span class="grad">.</span></h2>
-  <div class="btns" reveal><button class="btn" magnet (click)="copy()">{{ copied() ? 'Copié ✔' : 'mokhtarlaarif54@gmail.com' }}</button>
-    <a class="btn ghost" magnet href="https://linkedin.com/in/laarif-el-makhtar" target="_blank">LinkedIn ↗</a><a class="btn ghost" magnet href="tel:+212670983477">+212 670 983 477</a></div>
-  <footer>© 2026 El Makhtar Laarif · Youssoufia, Maroc · Fait avec Angular & Three.js</footer></section>
-</main>`,
+      <section id="contact" class="sec center">
+        <p class="mut" reveal>Un projet, un stage, une idée ?</p>
+        <h2 class="giant" reveal>Parlons-en<span class="grad">.</span></h2>
+        <div class="btns" reveal>
+          <button class="btn" magnet (click)="copy()">{{ copied() ? 'Copié ✔' : 'mokhtarlaarif54@gmail.com' }}</button>
+          <a class="btn ghost" magnet href="https://linkedin.com/in/laarif-el-makhtar" target="_blank">LinkedIn ↗</a><a
+            class="btn ghost" magnet href="tel:+212670983477">+212 670 983 477</a></div>
+        <footer>© 2026 El Makhtar Laarif · Youssoufia, Maroc · Fait avec Angular & Three.js</footer>
+      </section>
+    </main>`,
 })
 export class App {
   zone = inject(NgZone);
