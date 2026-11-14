@@ -83,7 +83,7 @@ export class Parallax {
         <span class="av"><img src="/projects/avatar-200.webp" width="40" height="40" alt=""/></span>EML<span>.</span>
       </a>
       <nav>
-        <a href="#about">À propos</a><a href="#skills">Skills</a><a href="#projects">Projets</a><a href="#journey">Parcours</a><a
+        <a href="#about">À propos</a><a href="#skills">Skills</a><a href="#projects">Projets</a><a href="#journey">Parcours</a><a class="dl" href="/El_Makhtar_Laarif_CV.pdf" download="El_Makhtar_Laarif_CV.pdf">CV ↓</a><a
           href="#contact" class="cta" magnet>Contact</a>
       </nav>
     </header>
@@ -95,26 +95,20 @@ export class Parallax {
               class="grad">Laarif</span></span></h1>
           <p class="role">&gt; {{ typed() }}<b class="caret"></b></p>
           <p class="sub">Je conçois des applications web performantes — de l’API Java à l’interface Angular.</p>
-          <div class="btns"><a class="btn" href="#projects" magnet>Voir mes projets</a><a class="btn ghost"
-                                                                                          href="https://github.com/ELMAKHTARLAARIF"
-                                                                                          target="_blank" magnet>GitHub
-            ↗</a></div>
+          <div class="btns">
+            <a class="btn" href="#projects" magnet>Voir mes projets</a>
+            <a class="btn cv" href="/projects/El_Makhtar_Laarif_CV.pdf" download="/projects/El_Makhtar_Laarif_CV.pdf" magnet>↓ Télécharger mon CV</a>
+            <a class="btn ghost" href="https://github.com/ELMAKHTARLAARIF" target="_blank" magnet>GitHub ↗</a>
+          </div>
         </div>
         <div class="scene">
-          <div class="stage3">
-            <div class="orbit o1"></div>
-            <div class="orbit o2"></div>
-            <div class="card3d">
-              <img src="/projects/profile-900.webp"
-                   srcset="/projects/profile-600.webp 600w, /projects/profile-900.webp 900w"
-                   sizes="(max-width: 860px) 230px, 290px"
-                   width="290" height="334"
-                   fetchpriority="high"
-                   alt="El Makhtar Laarif"/>
-            </div>
-            <span class="fl f1">Java</span><span class="fl f2">Angular</span><span class="fl f3">Laravel</span><span
-              class="fl f4">.NET</span>
-            <div class="cube"><b>Java</b><b>Angular</b><b>.NET</b><b>PHP</b><b>SQL</b><b>Docker</b></div>
+          <div class="photo">
+            <img src="/projects/profile-900.webp"
+                 srcset="/projects/profile-600.webp 600w, /projects/profile-900.webp 900w"
+                 sizes="(max-width: 860px) 300px, 380px"
+                 width="380" height="475"
+                 fetchpriority="high"
+                 alt="El Makhtar Laarif"/>
           </div>
         </div>
         <div class="scrollhint"><span>scroll</span><i></i></div>
@@ -122,7 +116,7 @@ export class Parallax {
 
       <div class="marq">
         <div>@for (k of [1, 2]; track k) {
-          <span>JAVA ✦ ANGULAR ✦ SPRING BOOT ✦ LARAVEL ✦ .NET ✦ POSTGRESQL ✦ DOCKER ✦ TAILWIND ✦ </span>
+          <span>JAVA ✦ ANGULAR ✦ SPRING BOOT ✦ LARAVEL ✦ .NET ✦ POSTGRESQL ✦ DOCKER ✦ TAILWIND ✦ SPRING AI ✦ RAG ✦ </span>
         }</div>
       </div>
 
@@ -222,6 +216,7 @@ export class Parallax {
         <h2 class="giant" reveal>Parlons-en<span class="grad">.</span></h2>
         <div class="btns" reveal>
           <button class="btn" magnet (click)="copy()">{{ copied() ? 'Copié ✔' : 'mokhtarlaarif54@gmail.com' }}</button>
+          <a class="btn cv" magnet href="/El_Makhtar_Laarif_CV.pdf" download="El_Makhtar_Laarif_CV.pdf">↓ Télécharger mon CV</a>
           <a class="btn ghost" magnet href="https://linkedin.com/in/laarif-el-makhtar" target="_blank">LinkedIn ↗</a><a
             class="btn ghost" magnet href="tel:+212670983477">+212 670 983 477</a></div>
         <footer>© 2026 El Makhtar Laarif · Youssoufia, Maroc · Fait avec Angular & Three.js</footer>
@@ -234,6 +229,7 @@ export class App {
   roles = ['Développeur Full Stack', 'Java · Spring Boot · Angular', 'Laravel · PHP · Tailwind', '.NET · SaaS'];
   skills = [
     { t: 'Front-End', l: ['HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'React JS', 'Angular'] }, { t: 'Back-End', l: ['Java', 'JEE', 'Spring Boot', 'PHP', 'Laravel', '.NET'] },
+    { t: 'IA & IA générative', l: ['LLM', 'Prompt Engineering', 'Spring AI', 'LangChain', 'RAG', 'Agentic RAG', 'Embeddings', 'pgvector', 'Agents IA', 'MCP'] },
     { t: 'Bases de données', l: ['SQL Server', 'MySQL', 'PostgreSQL'] }, { t: 'Outils', l: ['Git', 'GitHub', 'Docker', 'Jira', 'Figma'] },
     { t: 'Concepts & méthodes', l: ['POO', 'MVC', 'MVVM', 'Agile', 'Scrum'] }];
   code = `<i class="k">const</i> <i class="v">elMakhtar</i> = &#123;
