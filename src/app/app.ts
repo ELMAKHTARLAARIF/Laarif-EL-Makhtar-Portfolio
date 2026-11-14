@@ -83,7 +83,7 @@ export class Parallax {
         <span class="av"><img src="/projects/avatar-200.webp" width="40" height="40" alt=""/></span>EML<span>.</span>
       </a>
       <nav>
-        <a href="#about">À propos</a><a href="#skills">Skills</a><a href="#projects">Projets</a><a href="#journey">Parcours</a><a class="dl" href="/El_Makhtar_Laarif_CV.pdf" download="El_Makhtar_Laarif_CV.pdf">CV ↓</a><a
+        <a href="#about">À propos</a><a href="#skills">Skills</a><a href="#projects">Projets</a><a href="#journey">Parcours</a><a class="dl" href="/projects/El_Makhtar_Laarif_CV.pdf" download="/projects/El_Makhtar_Laarif_CV.pdf">CV ↓</a><a
           href="#contact" class="cta" magnet>Contact</a>
       </nav>
     </header>
@@ -216,7 +216,7 @@ export class Parallax {
         <h2 class="giant" reveal>Parlons-en<span class="grad">.</span></h2>
         <div class="btns" reveal>
           <button class="btn" magnet (click)="copy()">{{ copied() ? 'Copié ✔' : 'mokhtarlaarif54@gmail.com' }}</button>
-          <a class="btn cv" magnet href="/El_Makhtar_Laarif_CV.pdf" download="El_Makhtar_Laarif_CV.pdf">↓ Télécharger mon CV</a>
+          <a class="btn cv" magnet href="/projects/El_Makhtar_Laarif_CV.pdf" download="/projects/El_Makhtar_Laarif_CV.pdf">↓ Télécharger mon CV</a>
           <a class="btn ghost" magnet href="https://linkedin.com/in/laarif-el-makhtar" target="_blank">LinkedIn ↗</a><a
             class="btn ghost" magnet href="tel:+212670983477">+212 670 983 477</a></div>
         <footer>© 2026 El Makhtar Laarif · Youssoufia, Maroc · Fait avec Angular & Three.js</footer>
